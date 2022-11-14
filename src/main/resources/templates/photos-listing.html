@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/albums.css">
+    <title><span th:text="${firstName}" th:remove="tag" />'s Photos Listing</title>
+</head>
+<body>
+
+<div class='container-fluid'>
+
+    <!-- The header with project name and logout link -->
+    <div class="row album-header">
+        <div class="col">
+            <h2>
+                <span th:text="${firstName}" th:remove="tag" />'s Photos
+            </h2>
+        </div>
+
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <div class="p-2 bd-highlight">
+                <a href="/photolibrary/logout" style="color: #0ccc0b">Logout</a>
+            </div>
+            <div class="p-2 bd-highlight">
+                <img th:src="${picture}" class="img-circle" width="35" height="35">
+            </div>
+        </div>
+    </div>
+
+    <!-- Shows a breadcrumb. Use that to go back -->
+    <div class="row">
+        <nav class="m-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/photolibrary/albums">All
+                    Albums</a></li>
+                <li class="breadcrumb-item active">Photos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Each Photo of the album is shown as a card -->
+    <div class="row">
+        <div class="d-flex p-1" th:each="photo: ${photos}">
+
+            <div class="card">
+                <img th:src="${photo.baseUrl}" class="card-img-top album-card">
+
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <label th:text="${photo.mediaMetadata.creationTime}" />
+                    </h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>
